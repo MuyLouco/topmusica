@@ -1,12 +1,12 @@
 {
-  "name": "Ouro Negro Rodas",
-  "short_name": "Ouro Negro",
-  "description": "Organizador de rodas e campeonatos de capoeira, com música e cronômetro.",
+  "name": "Roda ON — Organizador de Rodas",
+  "short_name": "Roda ON",
+  "description": "Organize rodas de capoeira com jogos, cronômetro e músicas.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#101010",
-  "theme_color":"#ffffff",
+  "background_color": "#ffffff",
+  "theme_color": "#ffd400",
   "icons": [
     {
       "src": "icon-192.png",
