@@ -290,6 +290,27 @@ html[data-theme="dark"] #setup>label[for="names"],html[data-theme="dark"] #setup
 #roda .time-adjust>summary{font-size:13px!important;color:var(--muted)!important}
 #musicas #add,#musicas #playOrdered{display:none!important}
 @media(max-width:380px){#rodaQuick{gap:4px;padding:8px}#rodaQuick .sw{font-size:13px!important}#quickEdit{font-size:12px!important;padding:7px!important}#roda .now{top:78px!important}}
+
+/* V20: visual de uso imediato */
+#rodaQuick{justify-content:space-between!important;padding:7px 0!important;background:transparent!important;border:0!important;margin:0 0 8px!important}
+#rodaQuick #quickEdit{margin:0!important;background:var(--card)!important;color:var(--ink)!important;border:1px solid var(--line)!important;font-size:14px!important}
+#rodaQuick .quick-settings{position:relative!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important}
+#rodaQuick .quick-settings>summary{list-style:none!important;cursor:pointer!important;background:var(--card)!important;border:1px solid var(--line)!important;border-radius:10px!important;padding:10px 14px!important;font-size:14px!important;font-weight:800!important}
+#rodaQuick .quick-settings>summary::-webkit-details-marker{display:none}
+#rodaQuick .quick-settings-body{position:absolute!important;right:0;top:calc(100% + 5px);width:190px;z-index:40;background:var(--card)!important;border:1px solid var(--line)!important;box-shadow:0 6px 18px rgba(0,0,0,.18)!important;border-radius:12px!important;padding:12px!important;display:grid;gap:12px}
+#roda .now{padding:12px!important;top:80px!important;border-width:1px!important;box-shadow:0 2px 10px rgba(0,0,0,.06)!important}
+#roda .now .vs{font-size:clamp(21px,5.4vw,29px)!important;margin:6px 0!important}
+#roda .now .time-row{gap:7px!important}
+#roda .now .timer{font-size:clamp(30px,8vw,44px)!important;padding:8px!important;min-height:62px!important}
+#roda .now #tp{font-size:15px!important;min-height:53px!important;padding:8px!important}
+#roda .now #tr{min-width:40px!important;min-height:53px!important;padding:7px!important;font-size:20px!important;background:var(--card)!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+#roda .now .time-adjust{margin-top:7px!important;border:0!important;padding:0!important}
+#roda .now .time-adjust>summary{padding:5px!important;text-align:center!important;font-size:13px!important;font-weight:700!important}
+#roda .now .res{margin-top:7px!important}
+#roda .now .res button{min-height:35px!important;font-size:13px!important}
+#roda .now .now-actions{margin:8px 0 0!important}
+#roda #setup:not([open]){display:none!important}
+#roda .card:has(> .row > h2){margin-top:10px!important}
 </style></head><body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><defs>
 <symbol id="i-roda" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="8.5" cy="9.5" r="1.6"></circle><circle cx="15.5" cy="14.5" r="1.6"></circle><path d="M10 14l-2 3M14 10l2-3"></path></symbol>
@@ -310,7 +331,7 @@ Lucas" rows="6"></textarea>
 <div class="two"><div><label>Tempo de cada jogo</label><div class="stepper"><button aria-label="Menos 10 segundos" class="btn" data-s="-10">−</button><input class="field" id="secs" inputmode="numeric" max="900" min="10" type="number" value="90"/><button aria-label="Mais 10 segundos" class="btn" data-s="10">+</button></div></div>
 </div><details class="roda-options"><summary>Configurações da roda</summary><label class="sw"><input id="champ" type="checkbox"/>Modo campeonato</label><label class="sw"><input checked="" id="sound" type="checkbox"/>Buzina ao terminar</label><label for="hornVolume">Volume da buzina</label><input id="hornVolume" max="100" min="5" type="range" value="35"/><button class="btn" id="testHorn" type="button">▶ Testar buzina</button></details>
 <div class="row"><button class="btn primary" id="gen">Gerar jogos</button><button class="btn primary hide" id="apply">Aplicar participantes</button><button class="btn danger hide" id="newr">Nova roda</button></div></details>
-<div class="roda-quick hide" id="rodaQuick"><label class="sw"><input id="quickChamp" type="checkbox"/> Campeonato</label><label class="sw"><input id="quickSound" type="checkbox"/> Buzina</label><button class="btn" id="quickEdit" type="button">+ Participantes</button></div><div class="hide" id="live"></div></section>
+<div class="roda-quick hide" id="rodaQuick"><button class="btn" id="quickEdit" type="button">+ Participantes</button><details class="quick-settings"><summary>⚙ Opções</summary><div class="quick-settings-body"><label class="sw"><input id="quickChamp" type="checkbox"/> Campeonato</label><label class="sw"><input id="quickSound" type="checkbox"/> Buzina</label></div></details></div><div class="hide" id="live"></div></section>
 <section class="section-hidden" id="musicas"><details class="fold-section" id="fold-musicas"><summary>Músicas</summary><div class="card hide music-player" id="player"><div class="row between"><span class="small muted">♫ TOCANDO AGORA</span><button class="lnk" id="pclose">✕ Fechar</button></div><b class="player-title" id="ptitle"></b><div class="small muted" style="text-align:center">Capoeira Ouro Negro · Biblioteca pessoal</div><audio id="pa" preload="metadata"></audio><input aria-label="Posição da música" id="seek" max="1000" min="0" type="range" value="0"/><div class="row between small muted"><span id="elapsed">0:00</span><span id="duration">0:00</span></div><div class="player-controls"><button aria-label="Embaralhar" class="player-icon" id="shuffle" title="Embaralhar">⇄</button><button aria-label="Música anterior" class="player-icon" id="pprev">⏮</button><button aria-label="Tocar ou pausar" class="player-play" id="togglePlay">▶</button><button aria-label="Próxima música" class="player-icon" id="pnext">⏭</button><button aria-label="Modo repetição" class="player-icon" id="repeat" title="Repetir">↻</button></div><div class="row between player-extra"><button class="btn hide" id="openLyrics">Letra</button><button class="btn hide" id="openQueue">Fila</button><label class="small" style="margin:0">Velocidade <select class="field" id="speed" style="width:auto;min-height:38px"><option value="0.75">0,75×</option><option selected="" value="1">1×</option><option value="1.25">1,25×</option><option value="1.5">1,5×</option><option value="2">2×</option></select></label></div><div class="hide" id="queuePanel"><h2 style="margin-top:15px">Próximas músicas</h2><div id="queueList"></div></div></div>
 <div class="card"><div class="row between"><h2>Músicas</h2><div class="row"><label class="btn primary" style="margin:0">Importar do celular<input accept="audio/*,.mp3,.m4a,.aac,.ogg,.opus,.wav,.flac,.webm" class="hide" id="imp2" multiple="" type="file"/></label><button class="btn hide" id="add">+ Nova</button></div></div><div class="row" style="margin-top:12px"><button class="btn primary hide" id="playOrdered">▶ Tocar em ordem</button><button class="btn" id="playRandom">🔀 Tocar aleatório</button></div><input class="field" id="q" placeholder="Buscar música" style="margin-top:10px" type="search"/><div class="chips" id="chips"></div><div class="note hide" id="importStatus" role="status"></div><div id="sl"></div></div></details></section>
 <section class="hide" id="ritmos"><div class="card"><h2>Ritmos</h2><div class="chips" id="rchips"></div><p class="muted" id="rinfo"></p><div aria-label="Padrão rítmico" class="steps" id="steps"></div><div class="small muted">G grave · A agudo · C chiado · · pausa</div>
@@ -367,25 +388,25 @@ return out}
 let T={run:false,end:0,rem:90},iv=null,U=null,openH=new Set(),wl=null;document.addEventListener('visibilitychange',()=>{if(!document.hidden)tshow()});
 const nextOpen=i=>{const G=D.r.games;for(let k=1;k<=G.length;k++){const j=(i+k)%G.length;if(!G[j].x)return j}return-1};
 const eta=n=>{const m=Math.round(n*cfg.secs/60);return n?'~'+(m>=60?(m/60|0)+'h '+pad(m%60)+'min':m+' min')+' restantes':'fim'};
-function tshow(){if(T.run){T.rem=Math.max(0,(T.end-Date.now())/1000);if(T.rem<=0){T.rem=0;if(T.run)stopT(true)}}const e=$('tm');if(!e)return;const s=Math.ceil(T.rem);e.textContent=pad(s/60|0)+':'+pad(s%60);e.className='timer'+(T.rem<=0?' over':T.rem<=10?' low':'');const b=$('tp');if(b)b.textContent=T.run?'❚❚ Pausar':T.rem<=0?'↺ Reiniciar':'▶ Iniciar'}
+function tshow(){if(T.run){T.rem=Math.max(0,(T.end-Date.now())/1000);if(T.rem<=0){T.rem=0;stopT(true)}}const e=$('tm');if(!e)return;const s=Math.ceil(T.rem);e.textContent=pad(s/60|0)+':'+pad(s%60);e.className='timer'+(T.rem<=0?' over':T.rem<=10?' low':'');const b=$('tp');if(b)b.textContent=T.run?'❚❚ Pausar':'▶ Iniciar'}
 async function hornWithDuck(){
  const target=Number($('rmVolume').value)/100;
  const was=audio.volume;
  try{audio.volume=was*.12;await beep()}catch(e){console.warn(e)}
  finally{audio.volume=target}
 }
-function stopT(end){clearInterval(iv);T.run=false;if(wl){wl.release().catch(()=>{});wl=null}tshow();if(end&&D.r){const r=D.r,i=r.cur,g=r.games[i];if(g){if(!cfg.champ&&!g.x){U={i,x:g.x,cur:i};g.x='o'}const n=nextOpen(i);if(n>=0)r.cur=n;save();render()}}if(end&&cfg.sound)hornWithDuck()}
+function stopT(end){const wasRunning=T.run;clearInterval(iv);T.run=false;if(wl){wl.release().catch(()=>{});wl=null}if(end&&wasRunning&&D.r){const r=D.r,i=r.cur,g=r.games[i];if(g){if(!cfg.champ&&!g.x){U={i,x:g.x,cur:i};g.x='o'}const n=nextOpen(i);if(n>=0)r.cur=n;save();resetT();render()}}else tshow();if(end&&wasRunning&&cfg.sound)hornWithDuck()}
 function resetT(){clearInterval(iv);T={run:false,end:0,rem:cfg.secs};tshow()}
-async function startT(){if(T.rem<=0)T.rem=cfg.secs;try{await ac()}catch{}T.run=true;T.end=Date.now()+T.rem*1000;iv=setInterval(()=>{T.rem=Math.max(0,(T.end-Date.now())/1000);tshow();if(T.rem<=0)stopT(true)},200);try{wl=await navigator.wakeLock?.request('screen')}catch{}tshow()}
+async function startT(){if(T.rem<=0)T.rem=cfg.secs;try{await ac()}catch{}T.run=true;T.end=Date.now()+T.rem*1000;iv=setInterval(()=>{tshow()},200);try{wl=await navigator.wakeLock?.request('screen')}catch{}tshow()}
 function stats(){const s={};D.r.names.forEach(n=>s[n]={n,w:0,d:0,l:0,h:[]});D.r.games.forEach(g=>{const A=s[g.a],B=s[g.b];if(!A||!B||!g.x||!'adb'.includes(g.x))return;if(g.x==='d'){A.d++;B.d++;A.h.push(B.n+' — empate');B.h.push(A.n+' — empate')}else{const[W,L]=g.x==='a'?[A,B]:[B,A];W.w++;L.l++;W.h.push(L.n+' — vitória');L.h.push(W.n+' — derrota')}});
 const L=Object.values(s).map(p=>({...p,p:p.w*3+p.d})).sort((a,b)=>b.p-a.p||b.w-a.w||a.n.localeCompare(b.n,'pt-BR'));let pos=0,pv=null;L.forEach(p=>{const k=p.p+'/'+p.w;if(k!==pv){pos++;pv=k}p.pos=pos});return L}
 function render(){const r=D.r,el=$('live');$('rodaQuick').classList.toggle('hide',!r);$('quickChamp').checked=cfg.champ;$('quickSound').checked=cfg.sound;$('setup').open=!r;$('gen').classList.toggle('hide',!!r);['apply','newr'].forEach(i=>$(i).classList.toggle('hide',!r));
 if(!r){el.classList.add('hide');return}el.classList.remove('hide');
 const G=r.games,done=G.filter(g=>g.x).length,all=done===G.length,g=G[r.cur];
 let h=`<div class="now"><div class="row between small"><b>${all?'Roda concluída':`Jogo ${r.cur+1} de ${G.length}`}</b><span class="muted">${done}/${G.length} · ${eta(G.length-done)}</span></div>`;
-if(g&&(!all||cfg.champ)){h+=`<div class="vs"><b class="pa">${E(g.a)}</b><span>×</span><b>${E(g.b)}</b></div><div class="time-row"><div class="timer" id="tm"></div><button class="btn primary" id="tp"></button><button class="btn" id="tr" aria-label="Reiniciar tempo">↺</button></div><details class="time-adjust"><summary>Ajustar tempo</summary><div class="row c"><button class="btn" data-t="-10">−10s</button><button class="btn" data-t="10">+10s</button></div></details>`;
+if(g&&(!all||cfg.champ)){h+=`<div class="vs"><b class="pa">${E(g.a)}</b><span>×</span><b>${E(g.b)}</b></div><div class="time-row"><div class="timer" id="tm"></div><button class="btn primary" id="tp"></button><button class="btn" id="tr" aria-label="Reiniciar tempo" title="Reiniciar tempo">↺</button></div><details class="time-adjust"><summary>Mais controles</summary><div class="row c"><button class="btn" data-t="-10">−10s</button><button class="btn" data-t="10">+10s</button></div><div class="row between now-actions"><button class="btn" id="undo"${U?'':' disabled'}>↶ Desfazer</button><button class="btn" id="skip">Pular jogo ›</button></div></details>`;
 h+=!cfg.champ?`<div class="res"><button class="rb ok" data-r="o">Concluir jogo ✓</button></div>`:"";
-h+=`<div class="row between now-actions"><button class="btn" id="undo"${U?'':' disabled'}>↶ Desfazer resultado</button><button class="btn" id="skip">Pular jogo ›</button></div>`}
+h+=''}
 else h+=`<p class="muted" style="margin:6px 0">Todos os jogos foram concluídos.</p><div class="row"><button class="lnk" id="undo"${U?'':' disabled'}>↶ Desfazer</button></div>`;
 h+='</div><div class="card"><div class="row between"><h2>Jogos</h2><span class="small muted">'+(cfg.champ?'Toque na bolinha do resultado':'Toque num jogo para iniciar')+'</span></div>';
 const lb={a:'vitória do 1º',d:'empate',b:'vitória do 2º'};
