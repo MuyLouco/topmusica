@@ -311,6 +311,12 @@ html[data-theme="dark"] #setup>label[for="names"],html[data-theme="dark"] #setup
 #roda .now .now-actions{margin:8px 0 0!important}
 #roda #setup:not([open]){display:none!important}
 #roda .card:has(> .row > h2){margin-top:10px!important}
+
+/* V21: ações claras e botão de início vermelho */
+#rodaQuick #quickEdit{background:#ffda00!important;color:#101010!important;border:2px solid #d3ac00!important;font-weight:900!important;padding:12px 15px!important;box-shadow:0 2px 0 #c9a700!important}
+#rodaQuick .quick-settings>summary{background:var(--card)!important;color:var(--ink)!important;border:2px solid var(--ink)!important;padding:12px 15px!important;font-weight:900!important}
+#roda .now #tp{background:#e32620!important;color:#fff!important;border:2px solid #b71914!important;font-weight:900!important;box-shadow:0 2px 0 #a91611!important}
+#roda .now #tp:active{transform:translateY(1px)!important;box-shadow:none!important}
 </style></head><body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><defs>
 <symbol id="i-roda" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="8.5" cy="9.5" r="1.6"></circle><circle cx="15.5" cy="14.5" r="1.6"></circle><path d="M10 14l-2 3M14 10l2-3"></path></symbol>
@@ -371,9 +377,12 @@ async function beep(){
  const vol=Math.min(.7,Number($('hornVolume').value)/100*.7);
  try{
   if(!hornAudio){hornAudio=new Audio(HORN_DATA);hornAudio.preload='auto'}
-  hornAudio.pause();hornAudio.currentTime=0;hornAudio.volume=vol;
+  hornAudio.pause();hornAudio.volume=vol;
+  const seek=3;
+  try{hornAudio.currentTime=seek}catch{}
   await hornAudio.play();
-  await new Promise(resolve=>{const done=()=>{hornAudio.removeEventListener('ended',done);hornAudio.removeEventListener('error',done);resolve()};hornAudio.addEventListener('ended',done,{once:true});hornAudio.addEventListener('error',done,{once:true});setTimeout(done,3200)});
+  if(hornAudio.currentTime<seek-.3&&hornAudio.duration>seek){hornAudio.currentTime=seek}
+  await new Promise(resolve=>{const done=()=>{hornAudio.removeEventListener('ended',done);hornAudio.removeEventListener('error',done);resolve()};hornAudio.addEventListener('ended',done,{once:true});hornAudio.addEventListener('error',done,{once:true});setTimeout(()=>{hornAudio.pause();done()},1800)});
  }finally{hornBusy=false}
  return 2400;
 }
@@ -395,9 +404,10 @@ async function hornWithDuck(){
  try{audio.volume=was*.12;await beep()}catch(e){console.warn(e)}
  finally{audio.volume=target}
 }
-function stopT(end){const wasRunning=T.run;clearInterval(iv);T.run=false;if(wl){wl.release().catch(()=>{});wl=null}if(end&&wasRunning&&D.r){const r=D.r,i=r.cur,g=r.games[i];if(g){if(!cfg.champ&&!g.x){U={i,x:g.x,cur:i};g.x='o'}const n=nextOpen(i);if(n>=0)r.cur=n;save();resetT();render()}}else tshow();if(end&&wasRunning&&cfg.sound)hornWithDuck()}
+function prepareHorn(){try{if(!hornAudio){hornAudio=new Audio(HORN_DATA);hornAudio.preload='auto'}hornAudio.load()}catch(e){console.warn(e)}}
+function stopT(end){const wasRunning=T.run;clearInterval(iv);T.run=false;if(wl){wl.release().catch(()=>{});wl=null}if(end&&wasRunning&&cfg.sound)hornWithDuck();if(end&&wasRunning&&D.r){const r=D.r,i=r.cur,g=r.games[i];if(g){if(!cfg.champ&&!g.x){U={i,x:g.x,cur:i};g.x='o'}const n=nextOpen(i);if(n>=0)r.cur=n;save();resetT();render()}}else tshow()}
 function resetT(){clearInterval(iv);T={run:false,end:0,rem:cfg.secs};tshow()}
-async function startT(){if(T.rem<=0)T.rem=cfg.secs;try{await ac()}catch{}T.run=true;T.end=Date.now()+T.rem*1000;iv=setInterval(()=>{tshow()},200);try{wl=await navigator.wakeLock?.request('screen')}catch{}tshow()}
+async function startT(){if(T.rem<=0)T.rem=cfg.secs;if(cfg.sound)prepareHorn();try{await ac()}catch{}T.run=true;T.end=Date.now()+T.rem*1000;iv=setInterval(()=>{tshow()},200);try{wl=await navigator.wakeLock?.request('screen')}catch{}tshow()}
 function stats(){const s={};D.r.names.forEach(n=>s[n]={n,w:0,d:0,l:0,h:[]});D.r.games.forEach(g=>{const A=s[g.a],B=s[g.b];if(!A||!B||!g.x||!'adb'.includes(g.x))return;if(g.x==='d'){A.d++;B.d++;A.h.push(B.n+' — empate');B.h.push(A.n+' — empate')}else{const[W,L]=g.x==='a'?[A,B]:[B,A];W.w++;L.l++;W.h.push(L.n+' — vitória');L.h.push(W.n+' — derrota')}});
 const L=Object.values(s).map(p=>({...p,p:p.w*3+p.d})).sort((a,b)=>b.p-a.p||b.w-a.w||a.n.localeCompare(b.n,'pt-BR'));let pos=0,pv=null;L.forEach(p=>{const k=p.p+'/'+p.w;if(k!==pv){pos++;pv=k}p.pos=pos});return L}
 function render(){const r=D.r,el=$('live');$('rodaQuick').classList.toggle('hide',!r);$('quickChamp').checked=cfg.champ;$('quickSound').checked=cfg.sound;$('setup').open=!r;$('gen').classList.toggle('hide',!!r);['apply','newr'].forEach(i=>$(i).classList.toggle('hide',!r));
