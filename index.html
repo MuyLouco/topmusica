@@ -337,7 +337,47 @@ html[data-theme="dark"] #setup>label[for="names"],html[data-theme="dark"] #setup
 .quick-settings>summary{background:var(--soft)!important;color:var(--ink)!important}
 #live .small.muted{font-size:12px!important}
 @media(max-width:390px){#live .now .time-row{gap:5px!important}#live .now #tp{font-size:15px!important;padding:8px!important}#live .now #tr{min-width:38px!important;padding:6px!important}#live .now .timer{font-size:clamp(31px,8vw,45px)!important}}
-</style></head><body>
+</style>
+<style id="roda-on-simples-v21">
+/* Uma hierarquia clara: navegação, jogo atual, lista. Sem remover recursos. */
+:root{--roda-yellow:#ffd400;--roda-red:#d92c2c}
+.wrap{max-width:680px!important}
+.v14-shortcuts{position:sticky;top:0;z-index:45;background:var(--bg);padding:9px 0 12px!important;margin-bottom:12px!important;gap:8px!important}
+.v14-shortcuts a{min-height:55px!important;display:flex;align-items:center;justify-content:center;border-radius:13px!important;font-size:17px!important;padding:9px 5px!important}
+#rodaQuick{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;border:0!important;background:transparent!important;padding:0!important;margin:12px 0!important}
+#rodaQuick.hide{display:none!important}
+#quickEdit,.quick-settings>summary{display:flex!important;align-items:center;justify-content:center;min-height:53px!important;font-size:16px!important;font-weight:800!important;padding:10px 7px!important;margin:0!important;border-radius:13px!important;white-space:normal!important;text-align:center!important}
+#quickEdit{background:#fff3b6!important;color:#111!important;border:1.5px solid #e8bb00!important}
+.quick-settings{min-width:0!important;position:relative}
+.quick-settings>summary{background:var(--card)!important;color:var(--ink)!important;border:1.5px solid var(--line)!important}
+.quick-settings-body{z-index:40!important}
+#roda .now{top:75px!important;box-shadow:0 3px 14px rgba(0,0,0,.06)!important;border:1.5px solid var(--line)!important;padding:17px 14px 14px!important;margin-bottom:12px!important}
+#live .now .row.between.small{font-size:13px!important;font-weight:750!important}
+#live .now .vs{font-size:clamp(29px,7.5vw,44px)!important;margin:15px 0 17px!important;line-height:1.15!important}
+#live .now .time-row{grid-template-columns:minmax(0,1fr) auto auto!important;gap:7px!important}
+#live .now .timer{background:var(--roda-yellow)!important;color:#111!important;border:0!important;border-radius:13px!important;min-height:65px!important;display:flex!important;align-items:center;justify-content:center;font-size:clamp(33px,8vw,54px)!important;padding:9px 5px!important}
+#live .now .timer.low{color:#111!important}
+#live .now .timer.over{background:#e23b34!important;color:white!important}
+#live .now #tp{background:var(--roda-red)!important;color:#fff!important;border:0!important;min-height:65px!important;font-size:16px!important;padding:9px 12px!important}
+#live .now #tr{background:var(--soft)!important;border:1px solid var(--line)!important;min-height:65px!important;padding:8px!important}
+#live .now .time-adjust{margin-top:8px!important}
+#live .now .time-adjust>summary{font-size:13px!important;color:var(--muted)!important;padding:9px 5px!important}
+#live>.card{border-radius:17px!important;padding:14px 12px!important;margin-bottom:12px!important}
+#live>.card h2{font-size:22px!important;margin:0!important}
+#live>.card .row.between{align-items:center!important;gap:8px!important}
+#live>.card .row.between .small{font-size:12px!important;text-align:right}
+#live .g{min-height:66px!important;padding:10px 8px!important;border-bottom:1px solid var(--line)!important}
+#live .g.cur{background:var(--gs)!important;border-left:5px solid var(--roda-yellow)!important;border-radius:9px!important}
+#live .gn{font-size:clamp(18px,4.9vw,23px)!important;line-height:1.25!important}
+#live .g .n{font-size:14px!important;color:var(--muted)!important}
+#live .cl{width:39px!important;height:39px!important;min-width:39px!important}
+#setup{border-radius:17px!important}
+#setup>label[for=names],#setup .two>div:first-child>label{font-size:21px!important}
+#gen{width:100%!important;background:var(--roda-yellow)!important;color:#111!important;border-color:var(--roda-yellow)!important;font-weight:900!important}
+#rodaMusic{z-index:38!important}
+@media(max-width:390px){#live .now .time-row{gap:5px!important}#live .now #tp{font-size:14px!important;padding:7px!important}#live .now #tr{min-width:38px!important}#live .now .timer{font-size:clamp(29px,8vw,42px)!important}}
+</style>
+</head><body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><defs>
 <symbol id="i-roda" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="8.5" cy="9.5" r="1.6"></circle><circle cx="15.5" cy="14.5" r="1.6"></circle><path d="M10 14l-2 3M14 10l2-3"></path></symbol>
 <symbol id="i-musicas" viewbox="0 0 24 24"><path d="M9 18V6l10-2v12"></path><circle cx="6.5" cy="18" r="2.5"></circle><circle cx="16.5" cy="16" r="2.5"></circle></symbol>
@@ -357,7 +397,7 @@ Lucas" rows="6"></textarea>
 <div class="two"><div><label>Tempo de cada jogo</label><div class="stepper"><button aria-label="Menos 10 segundos" class="btn" data-s="-10">−</button><input class="field" id="secs" inputmode="numeric" max="900" min="10" type="number" value="90"/><button aria-label="Mais 10 segundos" class="btn" data-s="10">+</button></div></div>
 </div><details class="roda-options"><summary>Configurações da roda</summary><label class="sw"><input id="champ" type="checkbox"/>Modo campeonato</label><label class="sw"><input checked="" id="sound" type="checkbox"/>Buzina ao terminar</label><label for="hornVolume">Volume da buzina</label><input id="hornVolume" max="100" min="5" type="range" value="35"/><button class="btn" id="testHorn" type="button">▶ Testar buzina</button></details>
 <div class="row"><button class="btn primary" id="gen">Gerar jogos</button><button class="btn primary hide" id="apply">Aplicar participantes</button><button class="btn danger hide" id="newr">Nova roda</button></div></details>
-<div class="roda-quick hide" id="rodaQuick"><button class="btn" id="quickEdit" type="button">+ Participantes</button><details class="quick-settings"><summary>⚙ Opções</summary><div class="quick-settings-body"><label class="sw"><input id="quickChamp" type="checkbox"/> Campeonato</label><label class="sw"><input id="quickSound" type="checkbox"/> Buzina</label></div></details></div><div class="hide" id="live"></div></section>
+<div class="roda-quick hide" id="rodaQuick"><button class="btn" id="quickEdit" type="button">＋ Participantes</button><details class="quick-settings"><summary>⚙ Opções da roda</summary><div class="quick-settings-body"><label class="sw"><input id="quickChamp" type="checkbox"/> Campeonato</label><label class="sw"><input id="quickSound" type="checkbox"/> Buzina</label></div></details></div><div class="hide" id="live"></div></section>
 <section class="section-hidden" id="musicas"><details class="fold-section" id="fold-musicas"><summary>Músicas</summary><div class="card hide music-player" id="player"><div class="row between"><span class="small muted">♫ TOCANDO AGORA</span><button class="lnk" id="pclose">✕ Fechar</button></div><b class="player-title" id="ptitle"></b><div class="small muted" style="text-align:center">Capoeira Ouro Negro · Biblioteca pessoal</div><audio id="pa" preload="metadata"></audio><input aria-label="Posição da música" id="seek" max="1000" min="0" type="range" value="0"/><div class="row between small muted"><span id="elapsed">0:00</span><span id="duration">0:00</span></div><div class="player-controls"><button aria-label="Embaralhar" class="player-icon" id="shuffle" title="Embaralhar">⇄</button><button aria-label="Música anterior" class="player-icon" id="pprev">⏮</button><button aria-label="Tocar ou pausar" class="player-play" id="togglePlay">▶</button><button aria-label="Próxima música" class="player-icon" id="pnext">⏭</button><button aria-label="Modo repetição" class="player-icon" id="repeat" title="Repetir">↻</button></div><div class="row between player-extra"><button class="btn hide" id="openLyrics">Letra</button><button class="btn hide" id="openQueue">Fila</button><label class="small" style="margin:0">Velocidade <select class="field" id="speed" style="width:auto;min-height:38px"><option value="0.75">0,75×</option><option selected="" value="1">1×</option><option value="1.25">1,25×</option><option value="1.5">1,5×</option><option value="2">2×</option></select></label></div><div class="hide" id="queuePanel"><h2 style="margin-top:15px">Próximas músicas</h2><div id="queueList"></div></div></div>
 <div class="card"><div class="row between"><h2>Músicas</h2><div class="row"><label class="btn primary" style="margin:0">Importar do celular<input accept="audio/*,.mp3,.m4a,.aac,.ogg,.opus,.wav,.flac,.webm" class="hide" id="imp2" multiple="" type="file"/></label><button class="btn hide" id="add">+ Nova</button></div></div><div class="row" style="margin-top:12px"><button class="btn primary hide" id="playOrdered">▶ Tocar em ordem</button><button class="btn" id="playRandom">🔀 Tocar aleatório</button></div><input class="field" id="q" placeholder="Buscar música" style="margin-top:10px" type="search"/><div class="chips" id="chips"></div><div class="note hide" id="importStatus" role="status"></div><div id="sl"></div></div></details></section>
 <section class="hide" id="ritmos"><div class="card"><h2>Ritmos</h2><div class="chips" id="rchips"></div><p class="muted" id="rinfo"></p><div aria-label="Padrão rítmico" class="steps" id="steps"></div><div class="small muted">G grave · A agudo · C chiado · · pausa</div>
@@ -446,12 +486,12 @@ const L=Object.values(s).map(p=>({...p,p:p.w*3+p.d})).sort((a,b)=>b.p-a.p||b.w-a
 function render(){const r=D.r,el=$('live');$('rodaQuick').classList.toggle('hide',!r);$('quickChamp').checked=cfg.champ;$('quickSound').checked=cfg.sound;if(!r)$('setup').open=true;else $('setup').open=$('setup').dataset.manualOpen==='1';$('gen').classList.toggle('hide',!!r);['apply','newr'].forEach(i=>$(i).classList.toggle('hide',!r));
 if(!r){el.classList.add('hide');return}el.classList.remove('hide');
 const G=r.games,done=G.filter(g=>g.x).length,all=done===G.length,g=G[r.cur];
-let h=`<div class="now"><div class="row between small"><b>${all?'Roda concluída':`Jogo ${r.cur+1} de ${G.length}`}</b><span class="muted">${done}/${G.length} · ${eta(G.length-done)}</span></div>`;
-if(g&&(!all||cfg.champ)){h+=`<div class="vs"><b class="pa">${E(g.a)}</b><span>×</span><b>${E(g.b)}</b></div><div class="time-row"><div class="timer" id="tm"></div><button class="btn primary" id="tp"></button><button class="btn" id="tr" aria-label="Reiniciar tempo" title="Reiniciar tempo">↺</button></div><details class="time-adjust"><summary>Mais controles</summary><div class="row c"><button class="btn" data-t="-10">−10s</button><button class="btn" data-t="10">+10s</button></div><div class="row between now-actions"><button class="btn" id="undo"${U?'':' disabled'}>↶ Desfazer</button><button class="btn" id="skip">Pular jogo ›</button></div></details>`;
+let h=`<div class="now"><div class="row between small"><b>${all?'Roda concluída':`Jogo ${r.cur+1} de ${G.length}`}</b><span class="muted">${done} concluído${done===1?'':'s'}</span></div>`;
+if(g&&(!all||cfg.champ)){h+=`<div class="vs"><b class="pa">${E(g.a)}</b><span>×</span><b>${E(g.b)}</b></div><div class="time-row"><div class="timer" id="tm"></div><button class="btn primary" id="tp"></button><button class="btn" id="tr" aria-label="Reiniciar tempo" title="Reiniciar tempo">↺</button></div><details class="time-adjust"><summary>＋ Ajustar tempo · Desfazer · Pular jogo</summary><div class="row c"><button class="btn" data-t="-10">−10s</button><button class="btn" data-t="10">+10s</button></div><div class="row between now-actions"><button class="btn" id="undo"${U?'':' disabled'}>↶ Desfazer</button><button class="btn" id="skip">Pular jogo ›</button></div></details>`;
 h+=!cfg.champ?`<div class="res"><button class="rb ok" data-r="o">Concluir jogo ✓</button></div>`:"";
 h+=''}
 else h+=`<p class="muted" style="margin:6px 0">Todos os jogos foram concluídos.</p><div class="row"><button class="lnk" id="undo"${U?'':' disabled'}>↶ Desfazer</button></div>`;
-h+='</div><div class="card"><div class="row between"><h2>Jogos</h2><span class="small muted">'+(cfg.champ?'Toque na bolinha do resultado':'Toque num jogo para iniciar')+'</span></div>';
+h+='</div><div class="card"><div class="row between"><h2>Lista de jogos</h2><span class="small muted">'+(cfg.champ?'Marque o resultado':'Toque para jogar')+'</span></div>';
 const lb={a:'vitória do 1º',d:'empate',b:'vitória do 2º'};
 G.forEach((q,i)=>{h+=`<div class="g${i===r.cur&&!all?' cur':''}${q.x?' dn':''}" data-i="${i}"><span class="n">${i+1}</span><span class="gn"><b class="pa">${E(q.a)}</b> × <b>${E(q.b)}</b></span>`+(cfg.champ?`<span class="cells">${['a','d','b'].map(k=>`<button class="cl cl${k}${q.x===k?' on':''}" data-i="${i}" data-r="${k}" aria-label="${lb[k]}" title="${lb[k]}">${q.x===k?'✓':''}</button>`).join('')}</span>`:`<button class="cl clo${q.x?' on':''}" data-i="${i}" data-r="o" aria-label="Concluído">${q.x?'✓':''}</button>`)+'</div>'});
 h+='</div>';
